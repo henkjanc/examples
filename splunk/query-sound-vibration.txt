@@ -1,0 +1,1 @@
+index=main | rex ".+\s(?<tril>\d+)\s(?<audio>\d+)" | timechart span=50ms stdev(audio) stdev(tril)

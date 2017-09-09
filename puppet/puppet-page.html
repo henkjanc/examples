@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Puppet HTTP API: Certificate Request — Documentation — Puppet</title>
+    <link rel="alternate" type="application/atom+xml" title="Puppet Documentation Updates" href="https://github.com/puppetlabs/puppet-docs/commits/master.atom" />
+    <link rel="alternate" type="application/atom+xml" title="Puppet Blog Feed" href="http://puppet.com/feed/" />
+    <link rel='index' title='Puppet Documentation' href='https://docs.puppet.com' />
+    <link rel='icon' href='/favicon.ico?v=20160406' />
+
+    <!-- Fonts: must come before Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/files/stylesheets/fonts.css" />
+
+    <!-- Bootstrap -->
+    <link href="/files/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Other stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/files/stylesheets/adjustments.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/files/stylesheets/prism.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/files/stylesheets/anchor.css">
+    <!-- Localized styles, like sub-list numbering -->
+    <link rel="stylesheet" type="text/css" href="/files/stylesheets/style_localized_en.css" media="screen">
+
+    
+    <meta name="description" content="Certificate RequestThe certificate_request endpoint submits a Certificate Signing Request (CSR)to the master. The master must be configured to be a CA. The returnedCSR is always in the .pem format.Under Puppet Server’s CA..." />
+    <!-- Set a canonical URL, in the following order: 1. explicit, from yaml frontmatter; 2. implicit, from document data; 3. singleton, from page URL. -NF -->
+    <link rel="canonical" href="https://docs.puppet.com/puppet/latest/http_api/http_certificate_request.html" />
+  </head>
+
+  <body>
+    <!-- Hidden Search Field -->
+    <form action="https://www.google.com/cse" id="cse-search-box">
+        <div>
+            <input type="hidden" name="cx" value="000105152632420139001:x6x9kkvlsls" />
+            <input type="hidden" name="ie" value="UTF-8" />
+            <input type="text" name="q" class="gsc-input" size="31" />
+            <input type="submit" name="sa" class="searchbtn" value="Search" />
+        </div>
+    </form>
+
+    <!-- Static navbar -->
+        <nav class="navbar navbar-inverse navbar-static-top">
+      <div id="navbar-container" class="container-fluid">
+
+        <div id="navbar-top" class="row navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="//puppet.com" class="home">Home</a></li>
+            <li><a href="//puppet.com/puppetconf" class="offsite">PuppetConf</a></li>
+            <li><a href="//forge.puppet.com" class="offsite forge">Forge</a></li>
+            <li class="active"><a href="/" class="offsite docs">Docs</a></li>
+            <li><a href="//learn.puppet.com" class="offsite learn">Learn</a></li>
+
+            <li class="navbar-gap"><a href="/download/">Download docs</a></li>
+            <li><a href="//puppet.com/support">Support &amp; services</a></li>
+            <li><a href="//puppet.com/contact">Contact us</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+
+
+
+        <div id="navbar-bottom" class="row">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="navbar-logo" class="navbar-brand" href="//puppet.com"><img src="/images/puppet-logo/puppet-logo-amber-white-lg.png" alt="Puppet"></a>
+          </div>
+
+          <div class="navbar-header hidden-xs">
+            <a id="navbar-site-name" class="navbar-brand" href="/">Documentation</a>
+          </div>
+
+          <form class="navbar-form navbar-right navbar-collapse collapse" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" id="search-container" placeholder="Search...">
+              <img class="search-white" id="search-icon" src="/images/puppet-icons/search-white-2.svg" alt="Search">
+            </div>
+          </form>
+        </div>
+
+
+
+      </div>
+    </nav>
+
+
+
+    <div id="doc-switchers" class="container">
+      <div class="col-md-8">
+<div class="btn-group">
+  <button type="button" class="btn btn-nav dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Puppet
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li class="dropdown-header">Products</li>
+    <li><a href="/pe/2017.1/">Puppet Enterprise</a></li>
+    <li class="active"><a href="/puppet/4.10/">Puppet (PE and open source)</a></li>
+    <li><a href="/puppetserver/2.7/">Puppet Server (PE and open source)</a></li>
+    <li><a href="/puppetdb/4.4/">PuppetDB (PE and open source)</a></li>
+    <li><a href="/facter/3.6/">Facter (PE and open source)</a></li>
+    <li><a href="/hiera/3.3/">Hiera (PE and open source)</a></li>
+    <li><a href="/mcollective/">MCollective (PE and open source)</a></li>
+
+    <li class="dropdown-header">Other Languages</li>
+    <li><a href="/ja/pe/2017.1/">Puppet Enterprise (日本語)</a></li>
+
+    <li class="dropdown-header">Other</li>
+    <li><a href="/">Puppet Docs Front Page</a></li>
+    <li><a href="/security/">Security Announcements</a></li>
+    <li><a href="/forge/">Using the Puppet Forge</a></li>
+    <li><a href="/puppet/latest/reference/type.html">Resource Type Reference</a></li>
+    <li><a href="/community/community_guidelines.html">Puppet Community Guidelines</a></li>
+    <li><a href="/references/glossary.html">Glossary of Puppet Terms</a></li>
+
+  </ul>
+</div>
+ 
+<div class="btn-group">
+  <button type="button" class="btn btn-nav dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Version: 4.10 (latest)
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    
+    
+    
+      <li class="active">
+        <a>Version 4.10 (latest)</a>
+      </li>
+      
+    
+    
+    
+      <li>
+        <a href="/puppet/4.9/http_api/http_certificate_request.html">Version 4.9</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.8/http_api/http_certificate_request.html">Version 4.8</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.7/http_api/http_certificate_request.html">Version 4.7</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.6/http_api/http_certificate_request.html">Version 4.6</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.5/http_api/http_certificate_request.html">Version 4.5</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.4/http_api/http_certificate_request.html">Version 4.4</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.3/http_api/http_certificate_request.html">Version 4.3</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.2/http_api/http_certificate_request.html">Version 4.2</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.1/http_api/http_certificate_request.html">Version 4.1</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/4.0/http_api/http_certificate_request.html">Version 4.0</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/3.8/http_api/http_certificate_request.html">Version 3.8</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/3.7/http_api/http_certificate_request.html">Version 3.7</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/3.6/http_api/http_certificate_request.html">Version 3.6</a>
+      </li>
+    
+    
+    
+    
+      <li>
+        <a href="/puppet/3.5/http_api/http_certificate_request.html">Version 3.5</a>
+      </li>
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+  </ul>
+</div>
+
+</div>
+      <div class="col-md-4"><div class="visible-sm-inline visible-xs-inline"><a href="#document-nav">
+        Jump to Puppet navigation
+      </a></div></div>
+    </div>
+
+    <div class="container">
+
+      <div id="content" class="main-content col-xs-12 col-md-9 col-md-push-3 col-lg-8 col-lg-push-4">
+        <h1>Puppet HTTP API: Certificate Request</h1>
+        
+
+<div id="version-note"><p class="noisy">
+  
+    
+    This version of Puppet is not included in Puppet Enterprise. The latest version of PE includes <a href="/puppet/4.9/http_api/http_certificate_request.html">Puppet 4.9</a>.
+  
+  
+
+
+
+
+
+
+</p></div>
+
+
+
+        <nav class="in-page" id="page-nav">
+<ol class="toc">
+  <li class="toc-lv2"><a href="#find">Find</a></li>
+  <li class="toc-lv2"><a href="#save">Save</a></li>
+  <li class="toc-lv2"><a href="#search">Search</a></li>
+  <li class="toc-lv2"><a href="#destroy">Destroy</a>
+<ol class="toc">
+   <li class="toc-lv3"><a href="#supported-http-methods">Supported HTTP Methods</a></li>
+   <li class="toc-lv3"><a href="#supported-response-formats">Supported Response Formats</a></li>
+   <li class="toc-lv3"><a href="#parameters">Parameters</a></li>
+   <li class="toc-lv3"><a href="#examples">Examples</a></li>
+</ol></li>
+  <li class="toc-lv2"><a href="#schema">Schema</a></li>
+</ol></nav>
+        <div id="rendered-markdown">
+          <h1 id="certificate-request">Certificate Request</h1>
+
+<p>The <code>certificate_request</code> endpoint submits a Certificate Signing Request (CSR)
+to the master. The master must be configured to be a CA. The returned
+CSR is always in the <code>.pem</code> format.</p>
+
+<p>Under Puppet Server’s CA service, the <code>environment</code> parameter is ignored and can
+be omitted. Under a Rack or WEBrick Puppet master, <code>environment</code> is required and
+must be a valid environment, but it has no effect on the response.</p>
+
+<h2 id="find">Find</h2>
+
+<p>Get a submitted CSR</p>
+
+<pre><code>GET /puppet-ca/v1/certificate_request/:nodename?environment=:environment
+Accept: s
+</code></pre>
+
+<h2 id="save">Save</h2>
+
+<p>Submit a CSR</p>
+
+<pre><code>PUT /puppet-ca/v1/certificate_request/:nodename?environment=:environment
+Content-Type: text/plain
+</code></pre>
+
+<p>Note: The <code>:nodename</code> must match the Common Name on the submitted CSR.</p>
+
+<p>Note: Although the <code>Content-Type</code> is sent as <code>text/plain</code> the content is
+specifically a CSR in PEM format.</p>
+
+<h2 id="search">Search</h2>
+
+<p><strong>Note:</strong> The plural <code>certificate_requests</code> endpoint is a legacy feature. Puppet
+Server doesn’t support it, and we don’t plan to add support in the future.</p>
+
+<p>List submitted CSRs</p>
+
+<pre><code>GET /puppet-ca/v1/certificate_requests/:ignored_pattern?environment=:environment
+Accept: s
+</code></pre>
+
+<p>The <code>:ignored_pattern</code> parameter is not used, but must still be provided.</p>
+
+<h2 id="destroy">Destroy</h2>
+
+<p>Delete a submitted CSR</p>
+
+<pre><code>DELETE /puppet-ca/v1/certificate_request/:nodename?environment=:environment
+Accept: s
+</code></pre>
+
+<h3 id="supported-http-methods">Supported HTTP Methods</h3>
+
+<p>The default configuration only allows requests that result in a Find and a
+Save. You need to modify auth.conf in order to allow clients to use Search and
+Destroy actions. It is not recommended that you change the default settings.</p>
+
+<p>GET, PUT, DELETE</p>
+
+<h3 id="supported-response-formats">Supported Response Formats</h3>
+
+<p>s (denotes a string of text)</p>
+
+<p>The returned CSR is always in the <code>.pem</code> format.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<p>None</p>
+
+<h3 id="examples">Examples</h3>
+
+<h4 id="csr-found">CSR found</h4>
+
+<pre><code>GET /puppet-ca/v1/certificate_request/agency?environment=env
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+
+-----BEGIN CERTIFICATE REQUEST-----
+MIIBnzCCAQwCAQAwYzELMAkGA1UEBhMCVUsxDzANBgNVBAgTBkxvbmRvbjEPMA0G
+A1UEBxMGTG9uZG9uMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQx
+DzANBgNVBAMTBmFnZW5jeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAxSCr
+FKUKjVGFPuQ0iGM9mZKw94sOIgGohqrHH743kPvjsId3d38Qk+H+1DbVf42bQY0W
+kAVcwNDqmBnx0lOtQ0oeGnbbwlJFjhqXr8jFEljPrc9S2/IIILDf/FeYWw9lRiOV
+LoU6ZfCIBfq6v4D4KX3utRbOoELNyBeT6VA1ufMCAwEAAaAAMAkGBSsOAwIPBQAD
+gYEAno7O1jkR56TNMe1Cw/eyQUIaniG22+0kmoftjlcMYZ/IKCOz+HRgnDtBPf8j
+O5nt0PQN8YClW7Xx2U8ZTvBXn/UEKMtCBkbF+SULiayxPgfyKy/axinfutEChnHS
+ZtUMUBLlh+gGFqOuH69979SJ2QmQC6FNomTkYI7FOHD/TG0=
+-----END CERTIFICATE REQUEST-----
+</code></pre>
+
+<h4 id="csr-not-found">CSR not found</h4>
+
+<pre><code>GET /puppet-ca/v1/certificate_request/does_not_exist?environment=env
+
+HTTP/1.1 404 Not Found
+Content-Type: text/plain
+
+Not Found: Could not find certificate_request does_not_exist
+</code></pre>
+
+<h4 id="no-node-name-given">No node name given</h4>
+
+<pre><code>GET /puppet-ca/v1/certificate_request?environment=env
+
+HTTP/1.1 400 Bad Request
+Content-Type: text/plain
+
+No request key specified in /puppet-ca/v1/certificate_request
+</code></pre>
+
+<h4 id="delete-a-csr-that-exists">Delete a CSR that exists</h4>
+
+<pre><code>DELETE /puppet-ca/v1/certificate_request/agency?environment=production
+Accept: s
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+
+1
+</code></pre>
+
+<h4 id="delete-a-csr-that-does-not-exists">Delete a CSR that does not exists</h4>
+
+<pre><code>DELETE /puppet-ca/v1/certificate_request/missing?environment=production
+Accept: s
+
+HTTP/1.1 200 OK
+Content-Type: text/plain
+
+false
+</code></pre>
+
+<h4 id="retrieve-all-csrs">Retrieve all CSRs</h4>
+
+<pre><code> GET /puppet-ca/v1/certificate_requests/ignored?environment=production
+ Accept: s
+
+ HTTP/1.1 200 OK
+ Content-Type: text/plain
+
+ -----BEGIN CERTIFICATE REQUEST-----
+ MIIBnzCCAQwCAQAwYzELMAkGA1UEBhMCVUsxDzANBgNVBAgTBkxvbmRvbjEPMA0G
+ A1UEBxMGTG9uZG9uMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQx
+ DzANBgNVBAMTBmFnZW5jeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAxSCr
+ FKUKjVGFPuQ0iGM9mZKw94sOIgGohqrHH743kPvjsId3d38Qk+H+1DbVf42bQY0W
+ kAVcwNDqmBnx0lOtQ0oeGnbbwlJFjhqXr8jFEljPrc9S2/IIILDf/FeYWw9lRiOV
+ LoU6ZfCIBfq6v4D4KX3utRbOoELNyBeT6VA1ufMCAwEAAaAAMAkGBSsOAwIPBQAD
+ gYEAno7O1jkR56TNMe1Cw/eyQUIaniG22+0kmoftjlcMYZ/IKCOz+HRgnDtBPf8j
+ O5nt0PQN8YClW7Xx2U8ZTvBXn/UEKMtCBkbF+SULiayxPgfyKy/axinfutEChnHS
+ ZtUMUBLlh+gGFqOuH69979SJ2QmQC6FNomTkYI7FOHD/TG0=
+ -----END CERTIFICATE REQUEST-----
+
+ ---
+ -----BEGIN CERTIFICATE REQUEST-----
+ MIIBnjCCAQsCAQAwYjELMAkGA1UEBhMCVUsxDzANBgNVBAgTBkxvbmRvbjEPMA0G
+ A1UEBxMGTG9uZG9uMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQx
+ DjAMBgNVBAMTBWFnZW50MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1tucK
+ enT1CkDPgsCU/0e2cbzRsiKF8yHH7+ntF6Q3d9ZCaZWJ00mj0+YmiYrnum+KAikE
+ 45Iaf9vaUV3CPsDVrUPOI8kYehiv868ZhP3nxblE6iuNBK+Fdv9GN/vKQrmL5iRE
+ bIrOM3/lxpS7SpidGdA6EIVlS3604bwLY4xHNQIDAQABoAAwCQYFKw4DAg8FAAOB
+ gQAXH0YFuidPqB6P2MyPEEGZ3rzozINBx/oXvGptXI60Zy5mgH6iAkrZfi57pEzP
+ jFoO2JRaFxTJC1FVpc4zR1K6sq4h3fIMwqppJRX+5wJNKyhU61eY2gR2O/rAJzw4
+ wcUKf9JhoE7/p1cUulIIIq7t/ibCvf0LYSFwGqTwGqN2TQ==
+ -----END CERTIFICATE REQUEST-----
+</code></pre>
+
+<p>The CSR PEMs are separated by “\n—\n”</p>
+
+<h2 id="schema">Schema</h2>
+
+<p>A <code>certificate_request</code> response body is not structured data according to any
+standard scheme such as json/pson/yaml, so no schema is applicable.</p>
+
+        </div>
+        <blockquote><p style="font-size: 1.3em; text-align: center;"><a href="#content">↑ Back to top</a></p></blockquote>
+      </div>
+
+      <div class="sidebar col-xs-12 col-md-3 col-md-pull-9 col-lg-4 col-lg-pull-8">
+        <nav class="main" id="document-nav">
+          
+
+
+
+<h3 id="puppet-reference-manual">Puppet 4.10 reference manual</h3>
+
+
+<ul>
+  <li><a href="/puppet/4.10/index.html">Introduction</a></li>
+  <li><strong>Quick start guides</strong>
+    <ul>
+      <li><strong><a href="/puppet/4.10/quick_start.html">Quick start intro for *nix users</a></strong>
+        <ul>
+          <li><a href="/puppet/4.10/quick_start_user_group.html">1: Creating users and groups</a></li>
+          <li><a href="/puppet/4.10/quick_start_helloworld.html">2: Hello, world!</a></li>
+          <li><a href="/puppet/4.10/quick_start_module_install_nix.html">3: Module installation</a></li>
+          <li><a href="/puppet/4.10/quick_start_adding_classes_nix.html">4: Adding classes</a></li>
+          <li><a href="/puppet/4.10/quick_writing_nix.html">5: Writing modules</a></li>
+        </ul>
+      </li>
+      <li><strong><a href="/puppet/4.10/quick_start_essential_config.html">Essential configuration tasks</a></strong>
+        <ul>
+          <li><a href="/puppet/4.10/quick_start_ntp.html">NTP quick start guide</a></li>
+          <li><a href="/puppet/4.10/quick_start_dns.html">DNS quick start guide</a></li>
+          <li><a href="/puppet/4.10/quick_start_sudo.html">Sudo quick start guide</a></li>
+          <li><a href="/puppet/4.10/quick_start_firewall.html">Firewall quick start guide</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="/puppet/4.10/release_notes.html">Puppet 4.10 release notes</a></li>
+  <li><a href="/puppet/4.10/release_notes_agent.html">Puppet agent release notes</a></li>
+  <li><a href="/puppetserver/2.7/release_notes.html">Puppet Server 2.7 release notes</a></li>
+  <li><a href="/puppet/4.10/about_agent.html">puppet-agent: What is it, what’s in it?</a></li>
+  <li><a href="/puppet/4.10/whered_it_go.html">Where did everything go?</a></li>
+  <li><strong>Deprecated features</strong>
+    <ul>
+      <li><a href="/puppet/4.10/deprecated_summary.html">About deprecations in this version</a></li>
+      <li><a href="/puppet/4.10/deprecated_servers.html">Web servers</a></li>
+      <li><a href="/puppet/4.10/deprecated_operating_systems.html">Operating systems</a></li>
+      <li><a href="/puppet/4.10/deprecated_language.html">Language features</a></li>
+      <li><a href="/puppet/4.10/deprecated_api.html">Extension points and APIs</a></li>
+      <li><a href="/puppet/4.10/deprecated_settings.html">Settings</a></li>
+    </ul>
+  </li>
+  <li><strong>Installing and upgrading</strong>
+    <ul>
+      <li><a href="/puppet/4.10/architecture.html">Overview of Puppet’s architecture</a></li>
+      <li><a href="/puppet/4.10/system_requirements.html">System requirements</a></li>
+      <li><a href="/puppet/4.10/install_pre.html">Pre-install tasks</a></li>
+      <li><a href="/puppet/4.10/puppet_collections.html">Puppet Collection repositories</a></li>
+      <li><a href="/puppetserver/2.7/install_from_packages.html">Install: Puppet Server</a></li>
+      <li><strong>Install: Puppet agent</strong>
+        <ul>
+          <li><a href="/puppet/4.10/install_linux.html">Install agent: Linux</a></li>
+          <li><a href="/puppet/4.10/install_windows.html">Install agent: Windows</a></li>
+          <li><a href="/puppet/4.10/install_osx.html">Install agent: macOS</a></li>
+        </ul>
+      </li>
+      <li><a href="/puppetdb/4.4/install_via_module.html">Install: PuppetDB</a></li>
+      <li><a href="/puppet/4.10/upgrade_minor.html">Upgrade: From Puppet 4.x</a></li>
+      <li><strong>Upgrade: From Puppet 3.x</strong>
+        <ul>
+          <li><a href="/puppet/4.10/upgrade_major_pre.html">Get upgrade-ready</a></li>
+          <li><a href="/puppet/4.10/upgrade_major_server.html">Upgrade Puppet Server and PuppetDB</a></li>
+          <li><a href="/puppet/4.10/upgrade_major_agent.html">Upgrade 3.x agents</a></li>
+          <li><a href="/puppet/4.10/lang_updating_manifests.html">Updating 3.x manifests for Puppet 4.x</a></li>
+          <li><a href="/puppet/4.10/upgrade_major_post.html">Post-upgrade clean-up</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Configuration</strong>
+    <ul>
+      <li><a href="/puppet/4.10/config_about_settings.html">About Puppet’s settings</a></li>
+      <li><a href="/puppet/4.10/config_important_settings.html">Short list of important settings</a></li>
+      <li><strong>Config files</strong>
+        <ul>
+          <li><a href="/puppet/4.10/config_file_main.html">puppet.conf: The main config file</a></li>
+          <li><a href="/puppet/4.10/config_file_environment.html">environment.conf: Per-environment settings</a></li>
+          <li><a href="/puppet/4.10/config_file_auth.html">auth.conf (LEGACY): HTTPS authorization</a></li>
+          <li><a href="/puppet/4.10/config_file_fileserver.html">fileserver.conf: Custom fileserver mount points</a></li>
+          <li><a href="/puppet/4.10/config_file_puppetdb.html">puppetdb.conf: PuppetDB server locations</a></li>
+          <li><a href="/puppet/4.10/hiera_config_yaml_5.html">hiera.yaml: Data lookup configuration</a></li>
+          <li><a href="/puppet/4.10/config_file_autosign.html">autosign.conf: Basic certificate autosigning</a></li>
+          <li><a href="/puppet/4.10/config_file_csr_attributes.html">csr_attributes.yaml: Certificate extensions</a></li>
+          <li><a href="/puppet/4.10/config_file_oid_map.html">custom_trusted_oid_mapping.yaml: Short names for cert extension OIDs</a></li>
+          <li><a href="/puppet/4.10/config_file_device.html">device.conf: Network hardware access</a></li>
+          <li><a href="/puppet/4.10/config_file_routes.html">routes.yaml: Advanced plugin routing</a></li>
+        </ul>
+      </li>
+      <li><strong>Configuring Puppet Server</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/configuration.html">Puppet Server’s config files</a></li>
+          <li><a href="/puppetserver/2.7/config_file_puppetserver.html">puppetserver.conf: Main config file</a></li>
+          <li><a href="/puppetserver/2.7/config_file_auth.html">auth.conf: Access control</a></li>
+          <li><a href="/puppetserver/2.7/config_file_webserver.html">webserver.conf: Jetty web server config</a></li>
+          <li><a href="/puppetserver/2.7/config_file_web-routes.html">web-routes.conf: Mount points for component services</a></li>
+          <li><a href="/puppetserver/2.7/config_file_global.html">global.conf: Trapperkeeper settings</a></li>
+          <li><a href="/puppetserver/2.7/config_file_ca.html">ca.conf: CA service access control (deprecated)</a></li>
+          <li><a href="/puppetserver/2.7/config_file_master.html">master.conf: Authorization by HTTP header (deprecated)</a></li>
+          <li><a href="/puppetserver/2.7/config_file_product.html">product.conf: Configuring Product-level Interactions (optional)</a></li>
+          <li><a href="/puppetserver/2.7/config_file_logbackxml.html">logback.xml: Logging level and location</a></li>
+          <li><a href="/puppetserver/2.7/config_logging_advanced.html">Advanced logging configuration</a></li>
+          <li><a href="/puppetserver/2.7/bootstrap_upgrade_notes.html">Bootstrap upgrade notes</a></li>
+        </ul>
+      </li>
+      <li><a href="/puppet/4.10/config_print.html">Checking values of settings</a></li>
+      <li><a href="/puppet/4.10/config_set.html">Editing settings on the command line</a></li>
+      <li><a href="/puppet/4.10/configuration.html">Complete list of settings (configuration reference)</a></li>
+      <li><a href="/puppetserver/2.7/puppet_conf_setting_diffs.html">Settings that differ under Puppet Server</a></li>
+    </ul>
+  </li>
+  <li><strong>Important directories and files</strong>
+    <ul>
+      <li><a href="/puppet/4.10/dirs_codedir.html">Code and data directory (codedir)</a></li>
+      <li><a href="/puppet/4.10/dirs_confdir.html">Config directory (confdir)</a></li>
+      <li><a href="/puppet/4.10/dirs_manifest.html">The main manifest(s)</a></li>
+      <li><a href="/puppet/4.10/dirs_modulepath.html">The modulepath</a></li>
+      <li><a href="/puppet/4.10/dirs_ssldir.html">The SSLdir</a></li>
+      <li><a href="/puppet/4.10/dirs_vardir.html">Cache directory (vardir)</a></li>
+    </ul>
+  </li>
+  <li><strong>Environments</strong>
+    <ul>
+      <li><a href="/puppet/4.10/environments.html">About environments</a></li>
+      <li><a href="/puppet/4.10/environments_configuring.html">Configuring environments</a></li>
+      <li><a href="/puppet/4.10/environments_creating.html">Creating environments</a></li>
+      <li><a href="/puppet/4.10/environments_assigning.html">Assigning environments to nodes</a></li>
+      <li><a href="/puppet/4.10/environments_suggestions.html">Suggestions for use</a></li>
+      <li><a href="/puppet/4.10/environments_limitations.html">Limitations of environments</a></li>
+      <li><a href="/puppet/4.10/environment_isolation.html">Environment isolation</a></li>
+      <li><a href="/puppet/4.10/environments_https.html">Environments and Puppet’s HTTPS interface</a></li>
+    </ul>
+  </li>
+  <li><strong>Modules</strong>
+    <ul>
+      <li><a href="/puppet/4.10/modules_fundamentals.html">Fundamentals</a></li>
+      <li><a href="/puppet/4.10/bgtm.html">Beginner’s guide to writing modules</a></li>
+      <li><a href="/puppet/4.10/plugins_in_modules.html">Plugins in modules</a></li>
+      <li><a href="/puppet/4.10/modules_installing.html">Installing modules</a></li>
+      <li><a href="/puppet/4.10/modules_publishing.html">Publishing modules on the Puppet Forge</a></li>
+      <li><a href="/puppet/4.10/modules_metadata.html">Module metadata and metadata.json</a></li>
+      <li><a href="/puppet/4.10/modules_documentation.html">Documenting modules</a></li>
+      <li><a href="/puppet/4.10/tests_smoke.html">Smoke testing modules</a></li>
+    </ul>
+  </li>
+  <li><strong>Puppet’s services and tools</strong>
+    <ul>
+      <li><a href="/puppet/4.10/services_commands.html">Puppet’s commands</a></li>
+      <li><a href="/puppet/4.10/services_commands_windows.html">Running Puppet commands on Windows</a></li>
+      <li><strong>Puppet master</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/services_master_puppetserver.html">Puppet Server</a></li>
+          <li><a href="/puppet/4.10/services_master_rack.html">The rack Puppet master</a></li>
+          <li><a href="/puppet/4.10/passenger.html">Configuring a Server with Passenger and Apache</a></li>
+          <li><a href="/puppet/4.10/services_master_webrick.html">The WEBrick Puppet master</a></li>
+        </ul>
+      </li>
+      <li><a href="/puppet/4.10/services_agent_unix.html">Puppet agent on *nix</a></li>
+      <li><a href="/puppet/4.10/services_agent_windows.html">Puppet agent on Windows</a></li>
+      <li><a href="/puppet/4.10/services_apply.html">Puppet apply</a></li>
+    </ul>
+  </li>
+  <li><strong>Puppet Server</strong>
+    <ul>
+      <li><a href="/puppetserver/2.7/index.html">Index</a></li>
+      <li><a href="/puppetserver/2.7/services_master_puppetserver.html">About Puppet Server</a></li>
+      <li><a href="/puppetserver/2.7/release_notes.html">Release notes</a></li>
+      <li><a href="/puppetserver/2.7/deprecated_features.html">Deprecated features</a></li>
+      <li><a href="/puppetserver/2.7/puppetserver_vs_passenger.html">Notable differences vs. the Apache/Passenger stack</a></li>
+      <li><a href="/puppetserver/2.7/install_from_packages.html">Installation</a></li>
+      <li><a href="/puppetserver/2.7/puppet_conf_setting_diffs.html">Differing behavior in puppet.conf</a></li>
+      <li><a href="/puppetserver/2.7/gems.html">Using Ruby gems</a></li>
+      <li><a href="/puppetserver/2.7/subcommands.html">Subcommands</a></li>
+      <li><a href="/puppetserver/2.7/compatibility_with_puppet_agent.html">Backwards compatibility with Puppet 3 agents</a></li>
+      <li><a href="/puppetserver/2.7/external_ca_configuration.html">Using an external CA</a></li>
+      <li><a href="/puppetserver/2.7/external_ssl_termination.html">External SSL termination</a></li>
+      <li><a href="/puppetserver/2.7/tuning_guide.html">Tuning guide</a></li>
+      <li><a href="/puppetserver/2.7/restarting.html">Restarting Puppet Server</a></li>
+      <li><strong>Known issues and workarounds</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/known_issues.html">Known issues</a></li>
+          <li><a href="/puppetserver/2.7/ssl_server_certificate_change_and_virtual_ips.html">SSL problems with load-balanced PuppetDB servers (“server certificate change” error)</a></li>
+        </ul>
+      </li>
+      <li><strong>Administrative API</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/admin-api/v1/environment-cache.html">Environment cache</a></li>
+          <li><a href="/puppetserver/2.7/admin-api/v1/jruby-pool.html">JRuby pool</a></li>
+        </ul>
+      </li>
+      <li><strong>Puppet API</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/puppet-api/v3/environment_classes.html">Environment classes</a></li>
+          <li><a href="/puppetserver/2.7/puppet-api/v3/static_file_content.html">Static file content</a></li>
+        </ul>
+      </li>
+      <li><strong>Status API</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/status-api/v1/services.html">Services</a></li>
+        </ul>
+      </li>
+      <li><strong>Developer info</strong>
+        <ul>
+          <li><a href="/puppetserver/2.7/dev_debugging.html">Debugging</a></li>
+          <li><a href="/puppetserver/2.7/dev_running_from_source.html">Running from source</a></li>
+          <li><a href="/puppetserver/2.7/dev_trace_func.html">Tracing code events</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>The Puppet language</strong>
+    <ul>
+      <li><a href="/puppet/4.10/lang_updating_manifests.html">Updating 3.x manifests for Puppet 4.x</a></li>
+      <li><a href="/puppet/4.10/lang_visual_index.html">Visual index</a></li>
+      <li><a href="/puppet/4.10/lang_summary.html">Basics</a></li>
+      <li><a href="/puppet/4.10/lang_windows_file_paths.html">Handling file paths on Windows</a></li>
+      <li><a href="/puppet/4.10/lang_variables.html">Variables</a></li>
+      <li><a href="/puppet/4.10/lang_resources.html">Resources</a></li>
+      <li><a href="/puppet/4.10/lang_resources_advanced.html">Resources (advanced)</a></li>
+      <li><a href="/puppet/4.10/lang_relationships.html">Relationships and ordering</a></li>
+      <li><a href="/puppet/4.10/lang_classes.html">Classes</a></li>
+      <li><a href="/puppet/4.10/lang_defined_types.html">Defined resource types</a></li>
+      <li><a href="/puppet/4.10/lang_expressions.html">Expressions and operators</a></li>
+      <li><a href="/puppet/4.10/lang_conditional.html">Conditional statements and expressions</a></li>
+      <li><a href="/puppet/4.10/lang_functions.html">Function calls</a></li>
+      <li><a href="/puppet/4.10/function.html">Docs for built-in functions</a></li>
+      <li><a href="/puppet/4.10/lang_node_definitions.html">Node definitions</a></li>
+      <li><a href="/puppet/4.10/lang_comments.html">Comments</a></li>
+      <li><a href="/puppet/4.10/lang_facts_and_builtin_vars.html">Facts and built-in variables</a></li>
+      <li><a href="/puppet/4.10/lang_reserved.html">Reserved words and acceptable names</a></li>
+      <li><a href="/puppet/4.10/lang_write_functions_in_puppet.html">Writing functions (Puppet language)</a></li>
+      <li><a href="/puppet/4.10/custom_types.html">Custom types</a></li>
+      <li><a href="/puppet/4.10/provider_development.html">Provider development</a></li>
+      <li><strong>Values and data types</strong>
+        <ul>
+          <li><a href="/puppet/4.10/lang_data.html">About values and data types</a></li>
+          <li><a href="/puppet/4.10/lang_data_string.html">Strings</a></li>
+          <li><a href="/puppet/4.10/lang_data_number.html">Numbers</a></li>
+          <li><a href="/puppet/4.10/lang_data_boolean.html">Booleans</a></li>
+          <li><a href="/puppet/4.10/lang_data_array.html">Arrays</a></li>
+          <li><a href="/puppet/4.10/lang_data_hash.html">Hashes</a></li>
+          <li><a href="/puppet/4.10/lang_data_regexp.html">Regular expressions</a></li>
+          <li><a href="/puppet/4.10/lang_data_sensitive.html">Sensitive</a></li>
+          <li><a href="/puppet/4.10/lang_data_undef.html">Undef</a></li>
+          <li><a href="/puppet/4.10/lang_data_resource_reference.html">Resource references</a></li>
+          <li><a href="/puppet/4.10/lang_data_resource_type.html">Resource types</a></li>
+          <li><a href="/puppet/4.10/lang_data_default.html">Default</a></li>
+          <li><a href="/puppet/4.10/lang_data_type.html">Data type syntax</a></li>
+          <li><a href="/puppet/4.10/lang_data_abstract.html">Abstract data types</a></li>
+        </ul>
+      </li>
+      <li><strong>Templates</strong>
+        <ul>
+          <li><a href="/puppet/4.10/lang_template.html">Using templates</a></li>
+          <li><a href="/puppet/4.10/lang_template_epp.html">Embedded Puppet (EPP) template syntax</a></li>
+          <li><a href="/puppet/4.10/lang_template_erb.html">Embedded Ruby (ERB) template syntax</a></li>
+        </ul>
+      </li>
+      <li><strong>Advanced constructs</strong>
+        <ul>
+          <li><a href="/puppet/4.10/lang_iteration.html">Iteration and loops</a></li>
+          <li><a href="/puppet/4.10/lang_lambdas.html">Lambdas (code blocks)</a></li>
+          <li><a href="/puppet/4.10/lang_defaults.html">Resource defaults</a></li>
+          <li><a href="/puppet/4.10/lang_collectors.html">Resource collectors</a></li>
+          <li><a href="/puppet/4.10/lang_virtual.html">Virtual resources</a></li>
+          <li><a href="/puppet/4.10/lang_exported.html">Exported resources</a></li>
+          <li><a href="/puppet/4.10/lang_tags.html">Tags</a></li>
+          <li><a href="/puppet/4.10/lang_run_stages.html">Run stages</a></li>
+        </ul>
+      </li>
+      <li><strong>Details of complex behaviors</strong>
+        <ul>
+          <li><a href="/puppet/4.10/lang_containment.html">Containment of resources</a></li>
+          <li><a href="/puppet/4.10/lang_scope.html">Scope</a></li>
+          <li><a href="/puppet/4.10/lang_namespaces.html">Namespaces and autoloading</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Writing custom functions</strong>
+    <ul>
+      <li><a href="/puppet/4.10/functions_basics.html">Introduction to writing functions</a></li>
+      <li><a href="/puppet/4.10/lang_write_functions_in_puppet.html">Writing functions (Puppet language)</a></li>
+      <li><strong>Writing functions (modern Ruby API)</strong>
+        <ul>
+          <li><a href="/puppet/4.10/functions_ruby_overview.html">Overview and examples</a></li>
+          <li><a href="/puppet/4.10/functions_ruby_signatures.html">Defining signatures</a></li>
+          <li><a href="/puppet/4.10/functions_ruby_implementation.html">Special features in implementation methods</a></li>
+          <li><a href="/puppet/4.10/functions_ruby_documenting.html">Documenting Ruby functions</a></li>
+        </ul>
+      </li>
+      <li><a href="/puppet/4.10/functions_legacy.html">Writing functions (legacy Ruby API — avoid)</a></li>
+    </ul>
+  </li>
+  <li><strong>Hiera: using configuration data</strong>
+    <ul>
+      <li><a href="/puppet/4.10/hiera_intro.html">What is Hiera?</a></li>
+      <li><a href="/puppet/4.10/hiera_quick.html">Quick start guide</a></li>
+      <li><a href="/puppet/4.10/hiera_hierarchy.html">How hierarchies work</a></li>
+      <li><a href="/puppet/4.10/hiera_layers.html">How the three config layers work</a></li>
+      <li><strong>Upgrading to Hiera 5</strong>
+        <ul>
+          <li><a href="/puppet/4.10/hiera_migrate.html">Overview: Migrating existing Hiera configurations to Hiera 5</a></li>
+          <li><a href="/puppet/4.10/hiera_migrate_environments.html">Enable the environment layer</a></li>
+          <li><a href="/puppet/4.10/hiera_migrate_v3_yaml.html">Convert a v3 hiera.yaml to v5</a></li>
+          <li><a href="/puppet/4.10/hiera_migrate_v4_yaml.html">Convert an experimental (v4) hiera.yaml to v5</a></li>
+          <li><a href="/puppet/4.10/hiera_migrate_functions.html">Update classic Hiera function calls</a></li>
+          <li><a href="/puppet/4.10/hiera_migrate_modules.html">Add Hiera data to an existing module</a></li>
+        </ul>
+      </li>
+      <li><strong>Configuring Hiera (the hiera.yaml file)</strong>
+        <ul>
+          <li><a href="/puppet/4.10/hiera_config_yaml_5.html">hiera.yaml v5 syntax</a></li>
+          <li><a href="/puppet/4.10/hiera_interpolation.html">Interpolating variables and functions</a></li>
+          <li><a href="/puppet/4.10/hiera_config_yaml_3.html">hiera.yaml v3 syntax (deprecated)</a></li>
+          <li><a href="/puppet/4.10/hiera_config_yaml_4.html">hiera.yaml v4 syntax (deprecated)</a></li>
+        </ul>
+      </li>
+      <li><strong>Looking up data</strong>
+        <ul>
+          <li><a href="/puppet/4.10/hiera_automatic.html">Automatic class parameter lookup</a></li>
+          <li><a href="/puppet/4.10/hiera_use_function.html">Using the <code>lookup</code> function</a></li>
+          <li><a href="/puppet/4.10/hiera_merging.html">Merging data from multiple sources</a></li>
+          <li><a href="/puppet/4.10/hiera_subkey.html">Accessing hash and array elements (key.subkey notation)</a></li>
+          <li><a href="/puppet/4.10/hiera_use_hiera_functions.html">Using the deprecated <code>hiera</code> functions</a></li>
+          <li><a href="/puppet/4.10/man/lookup.html">Using the <code>puppet lookup</code> command</a></li>
+        </ul>
+      </li>
+      <li><strong>Creating and editing data</strong>
+        <ul>
+          <li><a href="/puppet/4.10/hiera_merging.html">Merging data from multiple sources</a></li>
+          <li><a href="/puppet/4.10/hiera_interpolation.html">Interpolating variables and functions</a></li>
+        </ul>
+      </li>
+      <li><strong>Writing new data backends</strong>
+        <ul>
+          <li><a href="/puppet/4.10/hiera_custom_backends.html">How custom backends work</a></li>
+          <li><a href="/puppet/4.10/hiera_custom_data_hash.html">Implementing a <code>data_hash</code> backend</a></li>
+          <li><a href="/puppet/4.10/hiera_custom_lookup_key.html">Implementing a <code>lookup_key</code> backend</a></li>
+          <li><a href="/puppet/4.10/hiera_custom_data_dig.html">Implementing a <code>data_dig</code> backend</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Resource types</strong>
+    <ul>
+      <li><a href="/puppet/4.10/type.html">All resource types (single-page reference)</a></li>
+      <li><a href="/puppet/4.10/resources_windows_optional.html">Optional resource types for Windows</a></li>
+      <li><a href="/puppet/4.10/types/augeas.html">augeas</a></li>
+      <li><a href="/puppet/4.10/resources_augeas.html">Augeas tips and examples</a></li>
+      <li><a href="/puppet/4.10/types/computer.html">computer</a></li>
+      <li><a href="/puppet/4.10/types/cron.html">cron</a></li>
+      <li><a href="/puppet/4.10/types/exec.html">exec</a></li>
+      <li><a href="/puppet/4.10/resources_exec_windows.html">Exec tips and examples for Windows</a></li>
+      <li><a href="/puppet/4.10/types/file.html">file</a></li>
+      <li><a href="/puppet/4.10/resources_file_windows.html">File tips and examples for Windows</a></li>
+      <li><a href="/puppet/4.10/types/filebucket.html">filebucket</a></li>
+      <li><a href="/puppet/4.10/types/group.html">group</a></li>
+      <li><a href="/puppet/4.10/resources_user_group_windows.html">User and group tips and examples for Windows</a></li>
+      <li><a href="/puppet/4.10/types/host.html">host</a></li>
+      <li><a href="/puppet/4.10/types/index.html">index</a></li>
+      <li><a href="/puppet/4.10/types/interface.html">interface</a></li>
+      <li><a href="/puppet/4.10/types/k5login.html">k5login</a></li>
+      <li><a href="/puppet/4.10/types/macauthorization.html">macauthorization</a></li>
+      <li><a href="/puppet/4.10/types/mailalias.html">mailalias</a></li>
+      <li><a href="/puppet/4.10/types/maillist.html">maillist</a></li>
+      <li><a href="/puppet/4.10/types/mcx.html">mcx</a></li>
+      <li><a href="/puppet/4.10/types/mount.html">mount</a></li>
+      <li><a href="/puppet/4.10/types/nagios_command.html">nagios_command</a></li>
+      <li><a href="/puppet/4.10/types/nagios_contact.html">nagios_contact</a></li>
+      <li><a href="/puppet/4.10/types/nagios_contactgroup.html">nagios_contactgroup</a></li>
+      <li><a href="/puppet/4.10/types/nagios_host.html">nagios_host</a></li>
+      <li><a href="/puppet/4.10/types/nagios_hostdependency.html">nagios_hostdependency</a></li>
+      <li><a href="/puppet/4.10/types/nagios_hostescalation.html">nagios_hostescalation</a></li>
+      <li><a href="/puppet/4.10/types/nagios_hostextinfo.html">nagios_hostextinfo</a></li>
+      <li><a href="/puppet/4.10/types/nagios_hostgroup.html">nagios_hostgroup</a></li>
+      <li><a href="/puppet/4.10/types/nagios_service.html">nagios_service</a></li>
+      <li><a href="/puppet/4.10/types/nagios_servicedependency.html">nagios_servicedependency</a></li>
+      <li><a href="/puppet/4.10/types/nagios_serviceescalation.html">nagios_serviceescalation</a></li>
+      <li><a href="/puppet/4.10/types/nagios_serviceextinfo.html">nagios_serviceextinfo</a></li>
+      <li><a href="/puppet/4.10/types/nagios_servicegroup.html">nagios_servicegroup</a></li>
+      <li><a href="/puppet/4.10/types/nagios_timeperiod.html">nagios_timeperiod</a></li>
+      <li><a href="/puppet/4.10/types/notify.html">notify</a></li>
+      <li><a href="/puppet/4.10/types/package.html">package</a></li>
+      <li><a href="/puppet/4.10/resources_package_windows.html">Package tips and examples for Windows</a></li>
+      <li><a href="/puppet/4.10/types/resources.html">resources</a></li>
+      <li><a href="/puppet/4.10/types/router.html">router</a></li>
+      <li><a href="/puppet/4.10/types/schedule.html">schedule</a></li>
+      <li><a href="/puppet/4.10/types/scheduled_task.html">scheduled_task</a></li>
+      <li><a href="/puppet/4.10/resources_scheduled_task_windows.html">Scheduled task tips and examples</a></li>
+      <li><a href="/puppet/4.10/types/selboolean.html">selboolean</a></li>
+      <li><a href="/puppet/4.10/types/selmodule.html">selmodule</a></li>
+      <li><a href="/puppet/4.10/types/service.html">service</a></li>
+      <li><a href="/puppet/4.10/resources_service.html">Service tips and examples</a></li>
+      <li><a href="/puppet/4.10/types/ssh_authorized_key.html">ssh_authorized_key</a></li>
+      <li><a href="/puppet/4.10/types/sshkey.html">sshkey</a></li>
+      <li><a href="/puppet/4.10/types/stage.html">stage</a></li>
+      <li><a href="/puppet/4.10/types/tidy.html">tidy</a></li>
+      <li><a href="/puppet/4.10/types/user.html">user</a></li>
+      <li><a href="/puppet/4.10/resources_user_group_windows.html">User and group tips and examples for Windows</a></li>
+      <li><a href="/puppet/4.10/types/vlan.html">vlan</a></li>
+      <li><a href="/puppet/4.10/types/yumrepo.html">yumrepo</a></li>
+      <li><a href="/puppet/4.10/types/zfs.html">zfs</a></li>
+      <li><a href="/puppet/4.10/types/zone.html">zone</a></li>
+      <li><a href="/puppet/4.10/types/zpool.html">zpool</a></li>
+    </ul>
+  </li>
+  <li><strong>Reports: Tracking Puppet’s activity</strong>
+    <ul>
+      <li><a href="/puppet/4.10/reporting_about.html">About reporting</a></li>
+      <li><a href="/puppet/4.10/report.html">Built-in report processors</a></li>
+      <li><a href="/puppet/4.10/reporting_write_processors.html">Writing custom report processors</a></li>
+      <li><a href="/puppet/4.10/format_report.html">Puppet::Transaction::Report object format</a></li>
+    </ul>
+  </li>
+  <li><strong>Extensions for assigning classes to nodes</strong>
+    <ul>
+      <li><a href="/puppet/4.10/nodes_external.html">External node classifiers</a></li>
+      <li><a href="/puppet/4.10/nodes_ldap.html">The LDAP node classifier</a></li>
+    </ul>
+  </li>
+  <li><strong>Misc. references (settings, functions, etc.)</strong>
+    <ul>
+      <li><a href="/puppet/4.10/configuration.html">Settings (configuration reference)</a></li>
+      <li><a href="/puppet/4.10/function.html">Functions</a></li>
+      <li><a href="/puppet/4.10/metaparameter.html">Metaparameters</a></li>
+      <li><a href="/puppet/4.10/report.html">Built-in report processors</a></li>
+      <li><a href="/puppet/4.10/indirection.html">Indirections and termini</a></li>
+      <li><a href="/puppet/4.10/yard/frames.html">Ruby API for developing extensions</a></li>
+    </ul>
+  </li>
+  <li><strong>Man pages</strong>
+    <ul>
+      <li><a href="/puppet/4.10/man/index.html">Index</a></li>
+      <li><strong>Core tools</strong>
+        <ul>
+          <li><a href="/puppet/4.10/man/agent.html">puppet agent</a></li>
+          <li><a href="/puppet/4.10/man/apply.html">puppet apply</a></li>
+          <li><a href="/puppet/4.10/man/cert.html">puppet cert</a></li>
+          <li><a href="/puppet/4.10/man/master.html">puppet master</a></li>
+          <li><a href="/puppet/4.10/man/module.html">puppet module</a></li>
+          <li><a href="/puppet/4.10/man/resource.html">puppet resource</a></li>
+          <li><a href="/puppet/4.10/man/lookup.html">puppet lookup</a></li>
+        </ul>
+      </li>
+      <li><strong>Occasionally useful</strong>
+        <ul>
+          <li><a href="/puppet/4.10/man/config.html">puppet config</a></li>
+          <li><a href="/puppet/4.10/man/describe.html">puppet describe</a></li>
+          <li><a href="/puppet/4.10/man/device.html">puppet device</a></li>
+          <li><a href="/puppet/4.10/man/doc.html">puppet doc</a></li>
+          <li><a href="/puppet/4.10/man/help.html">puppet help</a></li>
+          <li><a href="/puppet/4.10/man/man.html">puppet man</a></li>
+          <li><a href="/puppet/4.10/man/node.html">puppet node</a></li>
+          <li><a href="/puppet/4.10/man/parser.html">puppet parser</a></li>
+          <li><a href="/puppet/4.10/man/plugin.html">puppet plugin</a></li>
+        </ul>
+      </li>
+      <li><strong>Niche</strong>
+        <ul>
+          <li><a href="/puppet/4.10/man/ca.html">puppet ca</a></li>
+          <li><a href="/puppet/4.10/man/catalog.html">puppet catalog</a></li>
+          <li><a href="/puppet/4.10/man/certificate.html">puppet certificate</a></li>
+          <li><a href="/puppet/4.10/man/certificate_request.html">puppet certificate_request</a></li>
+          <li><a href="/puppet/4.10/man/certificate_revocation_list.html">puppet certificate_revocation_list</a></li>
+          <li><a href="/puppet/4.10/man/facts.html">puppet facts</a></li>
+          <li><a href="/puppet/4.10/man/file.html">puppet file</a></li>
+          <li><a href="/puppet/4.10/man/filebucket.html">puppet filebucket</a></li>
+          <li><a href="/puppet/4.10/man/inspect.html">puppet inspect</a></li>
+          <li><a href="/puppet/4.10/man/key.html">puppet key</a></li>
+          <li><a href="/puppet/4.10/man/report.html">puppet report</a></li>
+          <li><a href="/puppet/4.10/man/resource_type.html">puppet resource_type</a></li>
+          <li><a href="/puppet/4.10/man/status.html">puppet status</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>HTTP API</strong>
+    <ul>
+      <li><a href="/puppet/4.10/http_api/http_api_index.html">Index</a></li>
+      <li><a href="/puppet/4.10/http_api/pson.html">PSON</a></li>
+      <li><strong>Puppet v3 API</strong>
+        <ul>
+          <li><a href="/puppet/4.10/http_api/http_catalog.html">Catalog</a></li>
+          <li><a href="/puppet/4.10/http_api/http_node.html">Node</a></li>
+          <li><a href="/puppet/4.10/http_api/http_file_bucket_file.html">File bucket file</a></li>
+          <li><a href="/puppet/4.10/http_api/http_file_content.html">File content</a></li>
+          <li><a href="/puppet/4.10/http_api/http_file_metadata.html">File metadata</a></li>
+          <li><a href="/puppet/4.10/http_api/http_report.html">Report</a></li>
+          <li><a href="/puppet/4.10/http_api/http_environments.html">Environments</a></li>
+          <li><a href="/puppet/4.10/http_api/http_resource_type.html">Resource type</a></li>
+          <li><a href="/puppet/4.10/http_api/http_status.html">Status</a></li>
+        </ul>
+      </li>
+      <li><strong>CA v1 API</strong>
+        <ul>
+          <li><a href="/puppet/4.10/http_api/http_certificate.html">Certificate</a></li>
+          <li><a href="/puppet/4.10/http_api/http_certificate_request.html">Certificate signing requests</a></li>
+          <li><a href="/puppet/4.10/http_api/http_certificate_status.html">Certificate status</a></li>
+          <li><a href="/puppet/4.10/http_api/http_certificate_revocation_list.html">Certificate revocation list</a></li>
+        </ul>
+      </li>
+      <li><strong>Schemas (JSON files)</strong>
+        <ul>
+          <li><a href="/puppet/4.10/schemas/catalog.json">catalog.json</a></li>
+          <li><a href="/puppet/4.10/schemas/environments.json">environments.json</a></li>
+          <li><a href="/puppet/4.10/schemas/error.json">error.json</a></li>
+          <li><a href="/puppet/4.10/schemas/facts.json">facts.json</a></li>
+          <li><a href="/puppet/4.10/schemas/file_metadata.json">file_metadata.json</a></li>
+          <li><a href="/puppet/4.10/schemas/host.json">host.json</a></li>
+          <li><a href="/puppet/4.10/schemas/json-meta-schema.json">json-meta-schema.json</a></li>
+          <li><a href="/puppet/4.10/schemas/node.json">node.json</a></li>
+          <li><a href="/puppet/4.10/schemas/report.json">report.json</a></li>
+          <li><a href="/puppet/4.10/schemas/resource_type.json">resource_type.json</a></li>
+          <li><a href="/puppet/4.10/schemas/status.json">status.json</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>SSL and certificates</strong>
+    <ul>
+      <li><a href="/puppet/4.10/config_ssl_external_ca.html">Using an external CA</a></li>
+      <li><a href="/puppetserver/2.7/external_ca_configuration.html">Using an external CA with Puppet Server</a></li>
+      <li><a href="/puppetserver/2.7/external_ssl_termination.html">External SSL termination with Puppet Server</a></li>
+      <li><a href="/puppet/4.10/ssl_autosign.html">Configuring autosigning</a></li>
+      <li><a href="/puppet/4.10/ssl_attributes_extensions.html">CSR attributes and certificate extensions</a></li>
+      <li><a href="/puppet/4.10/ssl_regenerate_certificates.html">Regenerating all certificates in a deployment</a></li>
+    </ul>
+  </li>
+  <li><a href="/puppet/4.10/file_serving.html">Adding file server mount points</a></li>
+  <li><strong>Details about Puppet’s internals</strong>
+    <ul>
+      <li><a href="/puppet/4.10/subsystem_agent_master_comm.html">Agent/master HTTPS communications</a></li>
+      <li><a href="/puppet/4.10/subsystem_catalog_compilation.html">Catalog compilation</a></li>
+    </ul>
+  </li>
+  <li><strong>Experimental features</strong>
+    <ul>
+      <li><a href="/puppet/4.10/experiments_overview.html">Overview</a></li>
+      <li><a href="/puppet/4.10/experiments_msgpack.html">Msgpack support</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+
+        </nav>
+      </div>
+
+    </div>
+
+
+    <footer class="layout-footer">
+      
+
+      <div class="footer-row-1 container">
+        <div class="fg-col col-md-8 container">
+
+          <div class="fg-col col-md-3">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/232088/puppet-logo-white-sm.png" class="puppet-logo">
+          </div>
+
+          <div class="fg-col col-md-3">
+            <h3>Overview</h3>
+            <ul>
+              <li><a href="//puppet.com/product">Product</a></li>
+              <li><a href="//puppet.com/solutions">Solutions</a></li>
+              <li><a href="//puppet.com/resources">Resource Library</a></li>
+              <li><a href="//puppet.com/company">Company</a></li>
+              <li><a href="//puppet.com/product/open-source-projects">Open Source Projects</a></li>
+              <li><a href="//puppet.com/security">Security</a></li>
+            </ul>
+          </div>
+
+          <div class="fg-col col-md-3">
+            <h3>Resources</h3>
+            <ul>
+              <li><a href="//puppet.com/support/customer-support">Get Help</a></li>
+              <li><a href="//puppet.com/partners/partner-finder">Find a Partner</a></li>
+              <li><a href="//puppet.com/support-services/training">Training</a></li>
+              <li><a href="//puppet.com/download-puppet">Downloads</a></li>
+              <li><a href="//puppet.com/sitemap">Site Map</a></li>
+            </ul>
+          </div>
+
+          <div class="fg-col col-md-3">
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="//puppet.com/company/contact">Contact Us</a></li>
+              <li><a href="//puppet.com/community/events">Events</a></li>
+              <li><a href="//puppet.com/blog">Blog</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="fg-col col-md-3">
+          <h3>Join our mailing list</h3>
+          <p>Get our monthly newsletter and the occasional email we think you'll like.</p>
+          
+          <form class="lpeRegForm formNotEmpty" method="post" enctype="application/x-www-form-urlencoded" action="https://app-sjh.marketo.com/index.php/leadCapture/save" id="mktForm_1047" name="mktForm_1047">
+            <input class='mktFormText mktFormEmail mktFReq' name="Email" id="Email" type='email' value=""  placeholder="Enter your email" maxlength='255' tabIndex='1'>
+            <input class='mktFormHidden' name="Form_Name__c" id="Form_Name__c" type='hidden' value="Newsletter">
+            <input class='mktFormHidden' name="Current_Form_Name__c" id="Current_Form_Name__c" type='hidden' value="Newsletter">
+            <input class='mktFormHidden' name="Original_Campaign_ID__c" id="Original_Campaign_ID__c" type='hidden' value="701G0000000F68K">
+            <input class='mktFormHidden' name="Current_Lead_Source__c" id="Current_Lead_Source__c" type='hidden' value="Organic">
+            <input class='mktFormHidden' name="LeadSource" id="LeadSource" type='hidden' value="Organic">
+            <input class="mktFormHidden" name="LeadSourceDescription__c" id="LeadSourceDescription__c" type="hidden" value="Search">
+            <input class="mktFormHidden" name="CurrentLeadSourceDescription__c" id="CurrentLeadSourceDescription__c" type="hidden" value="Search">
+            <input class='mktFormHidden' name="Custom_Campaign__c" id="Custom_Campaign__c" type='hidden' value="null">
+            <input class='mktFormHidden' name="Current_Custom_Campaign__c" id="Current_Custom_Campaign__c" type='hidden' value="null">
+            <input class='mktFormHidden' name="honeypot" id="honeypot" type='hidden' value="null">
+            <input id='mktFrmSubmit' style="display:none;" type='submit' value='&#xf0a9;' name='submitButton'>
+            <span style="display:none;"><input type="text" name="_marketo_comments" value=""></span>
+            <input type="hidden" name="lpId" value="-1">
+            <input type="hidden" name="subId" value="100">
+            <input type="hidden" name="munchkinId" value="307-QLA-991">
+            <input type="hidden" name="kw" value="">
+            <input type="hidden" name="cr" value="">
+            <input type="hidden" name="searchstr" value="">
+            <input type="hidden" name="lpurl" value="http://info.puppetlabs.com/newslettersubscribe.html?cr={creative}&kw={keyword}">
+            <input type="hidden" name="formid" value="1047">
+            <input type="hidden" name="returnURL" value="http://www.puppet.com">
+            <input type="hidden" name="retURL" value="http://www.puppet.com/misc/subscription-thank-you">
+            <input type="hidden" name="returnLPId" value="-1">
+            <input type="hidden" name="_mkt_disp" value="return">
+            <input type="hidden" name="_mkt_trk" value="">
+          </form>
+
+
+          <p>
+            <a href="https://twitter.com/puppetize" class="social-icon"><img class="social-icon" src="/images/social-icons/twitter-box-white.svg" alt="Twitter"></a>
+            <a href="https://www.linkedin.com/company/puppet" class="social-icon"><img class="social-icon" src="/images/social-icons/linkedin-box-white.svg" alt="LinkedIn"></a>
+            <a href="https://www.facebook.com/PuppetSoftware" class="social-icon"><img class="social-icon" src="/images/social-icons/facebook-box-white.svg" alt="Facebook"></a>
+            <a href="https://www.youtube.com/c/Puppet-Inc" class="social-icon"><img class="social-icon" src="/images/social-icons/youtube-white.svg" alt="YouTube"></a>
+            <a href="https://plus.google.com/+Puppetlabs" class="social-icon"><img class="social-icon" src="/images/social-icons/g-plus-white.svg" alt="Google+"></a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-row-2 container">
+        <div class="footer-row-2-wrapper">
+          <div class="footer-row-2-col-1 col-md-9">
+            <a href="//puppet.com/legal">Legal</a>
+            <a href="//puppet.com/legal/privacy">Privacy Policy</a>
+            <a href="//puppet.com/legal/terms">Terms of Use</a>
+          </div>
+          <div class="footer-row-2-col-2 col-md-3">
+            <a href="/">&copy; 2016 Puppet</a>
+          </div>
+        </div>
+      </div>
+
+
+    </footer>
+
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/files/javascripts/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap's stock JS components -->
+    <script src="/files/js/bootstrap.min.js"></script>
+
+    <!-- Utility JS -->
+    <script type="text/javascript" src="/files/javascripts/prism.js"></script>
+    <script type="text/javascript" src="/files/javascripts/navigation-accordion.js"></script>
+    <!-- Hover anchor links on headers -->
+      <!-- Relies on jQuery. Code comes from https://github.com/bryanbraun/anchorjs -->
+      <script type="text/javascript" src="/files/javascripts/anchor.min.js"></script>
+      <script>
+      $(document).ready(function(){
+          addAnchors("#content h1");
+          addAnchors("#content h2");
+          addAnchors("#content h3");
+          addAnchors("#content h4");
+          });
+      </script>
+    <!-- End hover anchor links -->
+
+    <!-- Marketing and tracking javascripts -->
+    <!-- Google Tag Manager -->
+      <!-- To update or confirm working condition, contact the Web team, or search Confluence for "Google Tag Manager" or "Google Analytics". Contrary to the current docs, we've verified that this doesn't need to be at the top of the page. -->
+      <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PF6FV6"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PF6FV6');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Marketo form support v1 -->
+      <!-- Used only for the newsletter sign-up form. To update or confirm working condition, contact BizOps department. -->
+      <script type="text/javascript" src="//puppet.com/sites/default/files/mktFormSupport.js"></script>
+    <!-- Marketo tracking -->
+      <!-- To update or confirm working condition, contact BizOps department. -->
+      <!-- This is the "asynchronous jQuery" version of the tracking code, which assumes jQuery is available. -->
+      <!-- See https://docs.marketo.com/display/public/DOCS/Add+Munchkin+Tracking+Code+to+Your+Website#AddMunchkinTrackingCodetoYourWebsite-TypesofMunchkinTrackingCodes -->
+      <script type="text/javascript">
+        $.ajax({
+          url: '//munchkin.marketo.net/munchkin.js',
+          dataType: 'script',
+          cache: true,
+          success: function() {
+            Munchkin.init('307-QLA-991');
+          }
+        });
+      </script>
+    <!-- End Marketo tracking -->
+
+
+    <!-- One-off JS snippets -->
+    <script type="text/javascript">
+      // Handle routing of search to real (hidden) search input
+      $("#search-container").on( 'keypress', function (e) {
+        if (e.keyCode == 13) {
+          $('#cse-search-box [type="text"]').val($("#search-container").val());
+          $('#cse-search-box [type="submit"]').click();
+          return false;
+        }
+      });
+      $("#search-icon").on( 'click', function(e) {
+        $('#cse-search-box [type="text"]').val($("#search-container").val());
+        $('#cse-search-box [type="submit"]').click();
+      });
+
+      $( '#Email' ).on( 'keypress', function (evt) {
+        if (evt.keyCode == 13) {
+          $( '#mktFrmSubmit' ).click();
+          return false;
+        }
+      });
+    </script>
+
+
+  </body>
+
+</html>

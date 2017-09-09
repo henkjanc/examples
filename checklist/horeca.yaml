@@ -1,0 +1,41 @@
+----
+name: Bouw Cat III
+author: HCAS
+toc:
+  - 
+    title: bouwbesluit
+  - 
+    thema: bouwregels
+  - 
+    subthema: aanloop
+  - 
+    controleonderdeel: orienteringsgesprek
+  - 
+    aandachtspunt: omgevingsvergunning-aanwezig
+  - 
+    aandachtspunt: bescherming belendende shizzle
+  - 
+    aandachtspunt: bespreken plan van aanpak
+  - 
+    controleonderdeel: Uitzetten bouw
+  -
+    aandachtspunt: BWT goedgekeurde tekening
+  -
+    aandachtspunt: bouwveiligheidsplan
+
+locaties:
+  - terrein
+    - voorzijde
+    - achterzijde
+    - linkerzijde
+    - rechterzijde
+  - funderinga
+  - 1e verdieping
+  - 2e verdieping
+ 
+
+
+aandachtspunten:
+  - orienteringsgesprek
+    -
+    statussen:

@@ -1,0 +1,3 @@
+(:require [muffin.repositories.dao.muffin :as dao])
+(load-file "repositories/dao/muffin.clj")
+(load-file "muffin/repositories/dao/muffin.clj")

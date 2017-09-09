@@ -1,0 +1,15 @@
+(type [])
+(use 'midje.repl)
+(autotest)
+quit
+(autotest)
+(use 'midje.repl)
+(autotest)
+(use 'midje.repl)
+(autotest)
+(use 'midje.repl)
+(autotest)
+use 'midje.repl'
+(autotest)
+(use 'midje.repl)
+(autotest)

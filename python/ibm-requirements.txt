@@ -1,0 +1,13 @@
+attrs==16.3.0
+Automat==0.5.0
+constantly==15.1.0
+ibmiotf==0.2.6
+incremental==16.10.1
+iso8601==0.1.11
+paho-mqtt==1.2
+psutil==5.0.1
+pytz==2016.10
+requests==2.12.4
+six==1.10.0
+Twisted==17.1.0
+zope.interface==4.3.3

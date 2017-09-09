@@ -1,0 +1,7 @@
+#Remove first double-quotes
+{ "created": "test" } 
+=>
+{ created: "test" }
+
+Reg exp: 
+%s/"\(\w\+\)"/\1/

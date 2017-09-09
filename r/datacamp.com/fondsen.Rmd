@@ -1,0 +1,39 @@
+---
+title: "Funds"
+author: "Henk-Jan"
+date: "28 december 2015"
+output: 
+  html_document:
+    toc: true
+    number_sections: true
+---
+---
+```{r echo=FALSE, message=FALSE}
+library(dplyr)
+library(data.table)
+library(knitr)
+library(ggvis)
+load(file='~/funds')
+```
+## Overall fund performance
+
+```{r echo=FALSE}
+ barplot(c(89,15,91,76,86,73), names=2010:2015, main="% Profitable funds")
+```
+
+##Top 20 best funds 2015
+
+Below are displayed the top 20 best funds:
+
+```{r, echo=FALSE}
+table_top_20 = d %>% arrange(-perf_yr) %>% select(title,perf_yr,sd) 
+kable(table_top_20[1:20])
+```
+
+
+##Profitable vs non-profitable funds
+
+##Spread
+```{r, echo=FALSE, message=FALSE}
+d[perf_yr>-100] %>% ggvis(~perf_yr) %>% layer_histograms(fill := 'lightgreen', stroke := 'white') %>% add_axis("x",title = "Year performance")
+```

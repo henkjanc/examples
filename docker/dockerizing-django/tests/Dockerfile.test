@@ -1,0 +1,7 @@
+FROM python:3.5-onbuild
+
+WORKDIR /tests
+
+ADD run_tests.sh /tests/run_tests.sh
+
+CMD ["bash", "run_tests.sh"]

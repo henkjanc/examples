@@ -1,0 +1,402 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'hexo-cli', '-g' ]
+2 info using npm@1.1.61
+3 info using node@v0.8.9
+4 verbose read json /usr/local/lib/package.json
+5 verbose read json /usr/local/lib/package.json
+6 verbose cache add [ 'hexo-cli', null ]
+7 silly cache add name=undefined spec="hexo-cli" args=["hexo-cli",null]
+8 verbose parsed url { pathname: 'hexo-cli', path: 'hexo-cli', href: 'hexo-cli' }
+9 silly lockFile 48f79efe-hexo-cli hexo-cli
+10 verbose lock hexo-cli /Users/hcastermans/.npm/48f79efe-hexo-cli.lock
+11 silly lockFile 48f79efe-hexo-cli hexo-cli
+12 verbose addNamed [ 'hexo-cli', '' ]
+13 verbose addNamed [ null, '' ]
+14 silly lockFile f0acc666-hexo-cli hexo-cli@
+15 verbose lock hexo-cli@ /Users/hcastermans/.npm/f0acc666-hexo-cli.lock
+16 silly addNameRange { name: 'hexo-cli', range: '', hasData: false }
+17 verbose url raw hexo-cli
+18 verbose url resolving [ 'https://registry.npmjs.org/', './hexo-cli' ]
+19 verbose url resolved https://registry.npmjs.org/hexo-cli
+20 info trying registry request attempt 1 at 20:12:07
+21 verbose etag "1M0KPZKHMNL70ARIG9VM2F7WJ"
+22 http GET https://registry.npmjs.org/hexo-cli
+23 http 304 https://registry.npmjs.org/hexo-cli
+24 silly registry.get cb [ 304,
+24 silly registry.get   { date: 'Sat, 14 Nov 2015 19:12:07 GMT',
+24 silly registry.get     via: '1.1 varnish',
+24 silly registry.get     'cache-control': 'max-age=60',
+24 silly registry.get     etag: '"1M0KPZKHMNL70ARIG9VM2F7WJ"',
+24 silly registry.get     age: '0',
+24 silly registry.get     connection: 'keep-alive',
+24 silly registry.get     'x-served-by': 'cache-ams4148-AMS',
+24 silly registry.get     'x-cache': 'HIT',
+24 silly registry.get     'x-cache-hits': '1',
+24 silly registry.get     'x-timer': 'S1447528327.644135,VS0,VE710',
+24 silly registry.get     vary: 'Accept' } ]
+25 verbose etag hexo-cli from cache
+26 silly addNameRange number 2 { name: 'hexo-cli', range: '', hasData: true }
+27 silly addNameRange versions [ 'hexo-cli',
+27 silly addNameRange   [ '0.0.1',
+27 silly addNameRange     '0.1.0',
+27 silly addNameRange     '0.1.1',
+27 silly addNameRange     '0.1.2',
+27 silly addNameRange     '0.1.3',
+27 silly addNameRange     '0.1.4',
+27 silly addNameRange     '0.1.5',
+27 silly addNameRange     '0.1.6',
+27 silly addNameRange     '0.1.7',
+27 silly addNameRange     '0.1.8',
+27 silly addNameRange     '0.1.9' ] ]
+28 verbose addNamed [ 'hexo-cli', '0.1.9' ]
+29 verbose addNamed [ '0.1.9', '0.1.9' ]
+30 silly lockFile a95f6ebf-hexo-cli-0-1-9 hexo-cli@0.1.9
+31 verbose lock hexo-cli@0.1.9 /Users/hcastermans/.npm/a95f6ebf-hexo-cli-0-1-9.lock
+32 verbose read json /Users/hcastermans/.npm/hexo-cli/0.1.9/package/package.json
+33 silly lockFile a95f6ebf-hexo-cli-0-1-9 hexo-cli@0.1.9
+34 silly lockFile f0acc666-hexo-cli hexo-cli@
+35 silly resolved [ { name: 'hexo-cli',
+35 silly resolved     version: '0.1.9',
+35 silly resolved     description: 'Command line interface for Hexo',
+35 silly resolved     main: 'lib/index',
+35 silly resolved     bin: { hexo: './bin/hexo' },
+35 silly resolved     scripts:
+35 silly resolved      { eslint: 'eslint .',
+35 silly resolved        jscs: 'jscs .',
+35 silly resolved        test: 'mocha test/index.js',
+35 silly resolved        'test-cov': 'istanbul cover --print both _mocha -- test/index.js' },
+35 silly resolved     directories: { lib: './lib', bin: './bin' },
+35 silly resolved     engines: { node: '>= 0.10.0' },
+35 silly resolved     repository: { type: 'git', url: 'hexojs/hexo-cli' },
+35 silly resolved     homepage: 'http://hexo.io/',
+35 silly resolved     keywords: [ 'website', 'blog', 'cms', 'framework', 'hexo', 'cli' ],
+35 silly resolved     author:
+35 silly resolved      { name: 'Tommy Chen',
+35 silly resolved        email: 'tommy351@gmail.com',
+35 silly resolved        url: 'http://zespia.tw' },
+35 silly resolved     license: 'MIT',
+35 silly resolved     dependencies:
+35 silly resolved      { abbrev: '^1.0.7',
+35 silly resolved        bluebird: '^3.0.5',
+35 silly resolved        chalk: '^1.1.1',
+35 silly resolved        'hexo-fs': '^0.1.4',
+35 silly resolved        minimist: '^1.2.0',
+35 silly resolved        tildify: '^1.1.2' },
+35 silly resolved     devDependencies:
+35 silly resolved      { chai: '^3.4.0',
+35 silly resolved        eslint: '^1.8.0',
+35 silly resolved        'hexo-renderer-marked': '^0.2.5',
+35 silly resolved        istanbul: '^0.4.0',
+35 silly resolved        jscs: '^2.5.0',
+35 silly resolved        mocha: '^2.3.3',
+35 silly resolved        sinon: '^1.17.2' },
+35 silly resolved     readme: '# hexo-cli\n\n[![Build Status](https://travis-ci.org/hexojs/hexo-cli.svg?branch=master)](https://travis-ci.org/hexojs/hexo-cli)  [![NPM version](https://badge.fury.io/js/hexo-cli.svg)](http://badge.fury.io/js/hexo-cli) [![Coverage Status](https://coveralls.io/repos/hexojs/hexo-cli/badge.svg?branch=master)](https://coveralls.io/r/hexojs/hexo-cli?branch=master) [![Build status](https://ci.appveyor.com/api/projects/status/aa44wp75752x1t47/branch/master?svg=true)](https://ci.appveyor.com/project/tommy351/hexo-cli/branch/master)\n\nCommand line interface for Hexo.\n\n## Installation\n\n``` bash\n$ npm install hexo-cli -g\n```\n\n## License\n\nMIT',
+35 silly resolved     _id: 'hexo-cli@0.1.9',
+35 silly resolved     _from: 'hexo-cli' } ]
+36 info install hexo-cli@0.1.9 into /usr/local/lib
+37 info installOne hexo-cli@0.1.9
+38 warn engine hexo-cli@0.1.9: wanted: {"node":">= 0.10.0"} (current: {"node":"v0.8.9","npm":"1.1.61"})
+39 verbose from cache /Users/hcastermans/.npm/hexo-cli/0.1.9/package/package.json
+40 info /usr/local/lib/node_modules/hexo-cli unbuild
+41 verbose read json /usr/local/lib/node_modules/hexo-cli/package.json
+42 verbose tar unpack /Users/hcastermans/.npm/hexo-cli/0.1.9/package.tgz
+43 silly lockFile d89d9563--local-lib-node-modules-hexo-cli /usr/local/lib/node_modules/hexo-cli
+44 verbose lock /usr/local/lib/node_modules/hexo-cli /Users/hcastermans/.npm/d89d9563--local-lib-node-modules-hexo-cli.lock
+45 silly gunzTarPerm modes [ '755', '644' ]
+46 silly gunzTarPerm extractEntry package.json
+47 silly gunzTarPerm extractEntry .npmignore
+48 silly gunzTarPerm extractEntry README.md
+49 silly gunzTarPerm extractEntry LICENSE
+50 silly gunzTarPerm extractEntry .eslintignore
+51 silly gunzTarPerm extractEntry .eslintrc
+52 silly gunzTarPerm extractEntry bin/hexo
+53 silly gunzTarPerm extractEntry lib/find_pkg.js
+54 silly gunzTarPerm extractEntry lib/goodbye.js
+55 silly gunzTarPerm extractEntry lib/index.js
+56 silly gunzTarPerm extractEntry lib/logger.js
+57 silly gunzTarPerm extractEntry lib/console/help.js
+58 silly gunzTarPerm extractEntry lib/console/index.js
+59 silly gunzTarPerm extractEntry lib/console/init.js
+60 silly gunzTarPerm extractEntry lib/console/version.js
+61 silly gunzTarPerm extractEntry .gitmodules
+62 silly gunzTarPerm extractEntry .jscsrc
+63 silly gunzTarPerm extractEntry assets/package.json
+64 silly gunzTarPerm extractEntry assets/_config.yml
+65 silly gunzTarPerm extractEntry assets/gitignore
+66 silly gunzTarPerm extractEntry assets/scaffolds/draft.md
+67 silly gunzTarPerm extractEntry assets/scaffolds/page.md
+68 silly gunzTarPerm extractEntry assets/scaffolds/post.md
+69 silly gunzTarPerm extractEntry assets/source/_posts/hello-world.md
+70 silly gunzTarPerm extractEntry assets/themes/landscape/package.json
+71 silly gunzTarPerm extractEntry assets/themes/landscape/.npmignore
+72 silly gunzTarPerm extractEntry assets/themes/landscape/README.md
+73 silly gunzTarPerm extractEntry assets/themes/landscape/LICENSE
+74 silly gunzTarPerm extractEntry assets/themes/landscape/Gruntfile.js
+75 silly gunzTarPerm extractEntry assets/themes/landscape/_config.yml
+76 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/google-analytics.ejs
+77 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/after-footer.ejs
+78 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/archive.ejs
+79 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/article.ejs
+80 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/footer.ejs
+81 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/archive-post.ejs
+82 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/head.ejs
+83 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/header.ejs
+84 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/mobile-nav.ejs
+85 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/post/category.ejs
+86 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/post/date.ejs
+87 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/post/gallery.ejs
+88 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/post/nav.ejs
+89 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/post/tag.ejs
+90 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/post/title.ejs
+91 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_partial/sidebar.ejs
+92 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_widget/archive.ejs
+93 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_widget/category.ejs
+94 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_widget/recent_posts.ejs
+95 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_widget/tag.ejs
+96 silly gunzTarPerm extractEntry assets/themes/landscape/layout/_widget/tagcloud.ejs
+97 silly gunzTarPerm extractEntry assets/themes/landscape/layout/archive.ejs
+98 silly gunzTarPerm extractEntry assets/themes/landscape/layout/category.ejs
+99 silly gunzTarPerm extractEntry assets/themes/landscape/layout/index.ejs
+100 silly gunzTarPerm extractEntry assets/themes/landscape/layout/layout.ejs
+101 silly gunzTarPerm extractEntry assets/themes/landscape/layout/page.ejs
+102 silly gunzTarPerm extractEntry assets/themes/landscape/layout/post.ejs
+103 silly gunzTarPerm extractEntry assets/themes/landscape/layout/tag.ejs
+104 silly gunzTarPerm extractEntry assets/themes/landscape/scripts/fancybox.js
+105 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_extend.styl
+106 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/archive.styl
+107 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/article.styl
+108 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/comment.styl
+109 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/footer.styl
+110 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/header.styl
+111 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/highlight.styl
+112 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/mobile.styl
+113 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/sidebar-aside.styl
+114 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/sidebar-bottom.styl
+115 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_partial/sidebar.styl
+116 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_util/grid.styl
+117 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_util/mixin.styl
+118 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/_variables.styl
+119 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/fonts/fontawesome-webfont.eot
+120 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/fonts/fontawesome-webfont.svg
+121 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/fonts/fontawesome-webfont.ttf
+122 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/fonts/fontawesome-webfont.woff
+123 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/fonts/FontAwesome.otf
+124 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/images/banner.jpg
+125 silly gunzTarPerm extractEntry assets/themes/landscape/source/css/style.styl
+126 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/jquery.fancybox.js
+127 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/jquery.fancybox.pack.js
+128 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/blank.gif
+129 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/fancybox_loading.gif
+130 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/fancybox_loading@2x.gif
+131 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/fancybox_overlay.png
+132 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/fancybox_sprite.png
+133 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/fancybox_sprite@2x.png
+134 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/helpers/jquery.fancybox-buttons.js
+135 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/helpers/jquery.fancybox-media.js
+136 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/helpers/jquery.fancybox-thumbs.js
+137 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/helpers/fancybox_buttons.png
+138 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/helpers/jquery.fancybox-buttons.css
+139 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/helpers/jquery.fancybox-thumbs.css
+140 silly gunzTarPerm extractEntry assets/themes/landscape/source/fancybox/jquery.fancybox.css
+141 silly gunzTarPerm extractEntry assets/themes/landscape/source/js/script.js
+142 verbose read json /usr/local/lib/node_modules/hexo-cli/package.json
+143 silly lockFile d89d9563--local-lib-node-modules-hexo-cli /usr/local/lib/node_modules/hexo-cli
+144 info preinstall hexo-cli@0.1.9
+145 verbose from cache /usr/local/lib/node_modules/hexo-cli/package.json
+146 verbose readDependencies using package.json deps
+147 verbose from cache /usr/local/lib/node_modules/hexo-cli/package.json
+148 verbose readDependencies using package.json deps
+149 verbose cache add [ 'abbrev@^1.0.7', null ]
+150 silly cache add name=undefined spec="abbrev@^1.0.7" args=["abbrev@^1.0.7",null]
+151 verbose parsed url { pathname: 'abbrev@^1.0.7',
+151 verbose parsed url   path: 'abbrev@^1.0.7',
+151 verbose parsed url   href: 'abbrev@^1.0.7' }
+152 silly cache add name="abbrev" spec="^1.0.7" args=["abbrev","^1.0.7"]
+153 verbose parsed url { pathname: '^1.0.7', path: '^1.0.7', href: '^1.0.7' }
+154 verbose addNamed [ 'abbrev', '^1.0.7' ]
+155 verbose addNamed [ null, null ]
+156 silly lockFile ec589c49-abbrev-1-0-7 abbrev@^1.0.7
+157 verbose lock abbrev@^1.0.7 /Users/hcastermans/.npm/ec589c49-abbrev-1-0-7.lock
+158 verbose cache add [ 'bluebird@^3.0.5', null ]
+159 silly cache add name=undefined spec="bluebird@^3.0.5" args=["bluebird@^3.0.5",null]
+160 verbose parsed url { pathname: 'bluebird@^3.0.5',
+160 verbose parsed url   path: 'bluebird@^3.0.5',
+160 verbose parsed url   href: 'bluebird@^3.0.5' }
+161 silly cache add name="bluebird" spec="^3.0.5" args=["bluebird","^3.0.5"]
+162 verbose parsed url { pathname: '^3.0.5', path: '^3.0.5', href: '^3.0.5' }
+163 verbose addNamed [ 'bluebird', '^3.0.5' ]
+164 verbose addNamed [ null, null ]
+165 silly lockFile b6975983-bluebird-3-0-5 bluebird@^3.0.5
+166 verbose lock bluebird@^3.0.5 /Users/hcastermans/.npm/b6975983-bluebird-3-0-5.lock
+167 info addNameTag [ 'abbrev', '^1.0.7' ]
+168 info addNameTag [ 'bluebird', '^3.0.5' ]
+169 verbose cache add [ 'chalk@^1.1.1', null ]
+170 silly cache add name=undefined spec="chalk@^1.1.1" args=["chalk@^1.1.1",null]
+171 verbose parsed url { pathname: 'chalk@^1.1.1',
+171 verbose parsed url   path: 'chalk@^1.1.1',
+171 verbose parsed url   href: 'chalk@^1.1.1' }
+172 silly cache add name="chalk" spec="^1.1.1" args=["chalk","^1.1.1"]
+173 verbose parsed url { pathname: '^1.1.1', path: '^1.1.1', href: '^1.1.1' }
+174 verbose addNamed [ 'chalk', '^1.1.1' ]
+175 verbose addNamed [ null, null ]
+176 silly lockFile b07b58bc-chalk-1-1-1 chalk@^1.1.1
+177 verbose lock chalk@^1.1.1 /Users/hcastermans/.npm/b07b58bc-chalk-1-1-1.lock
+178 verbose cache add [ 'hexo-fs@^0.1.4', null ]
+179 silly cache add name=undefined spec="hexo-fs@^0.1.4" args=["hexo-fs@^0.1.4",null]
+180 verbose parsed url { pathname: 'hexo-fs@^0.1.4',
+180 verbose parsed url   path: 'hexo-fs@^0.1.4',
+180 verbose parsed url   href: 'hexo-fs@^0.1.4' }
+181 silly cache add name="hexo-fs" spec="^0.1.4" args=["hexo-fs","^0.1.4"]
+182 verbose parsed url { pathname: '^0.1.4', path: '^0.1.4', href: '^0.1.4' }
+183 verbose addNamed [ 'hexo-fs', '^0.1.4' ]
+184 verbose addNamed [ null, null ]
+185 silly lockFile dac63f6a-hexo-fs-0-1-4 hexo-fs@^0.1.4
+186 verbose lock hexo-fs@^0.1.4 /Users/hcastermans/.npm/dac63f6a-hexo-fs-0-1-4.lock
+187 verbose cache add [ 'minimist@^1.2.0', null ]
+188 silly cache add name=undefined spec="minimist@^1.2.0" args=["minimist@^1.2.0",null]
+189 verbose parsed url { pathname: 'minimist@^1.2.0',
+189 verbose parsed url   path: 'minimist@^1.2.0',
+189 verbose parsed url   href: 'minimist@^1.2.0' }
+190 silly cache add name="minimist" spec="^1.2.0" args=["minimist","^1.2.0"]
+191 verbose parsed url { pathname: '^1.2.0', path: '^1.2.0', href: '^1.2.0' }
+192 verbose addNamed [ 'minimist', '^1.2.0' ]
+193 verbose addNamed [ null, null ]
+194 silly lockFile 53129369-minimist-1-2-0 minimist@^1.2.0
+195 verbose lock minimist@^1.2.0 /Users/hcastermans/.npm/53129369-minimist-1-2-0.lock
+196 info addNameTag [ 'chalk', '^1.1.1' ]
+197 info addNameTag [ 'hexo-fs', '^0.1.4' ]
+198 verbose url raw abbrev
+199 verbose url resolving [ 'https://registry.npmjs.org/', './abbrev' ]
+200 verbose url resolved https://registry.npmjs.org/abbrev
+201 info trying registry request attempt 1 at 20:12:08
+202 verbose etag "F3Q3N6H2H59MS1PC9J6CMODYT"
+203 http GET https://registry.npmjs.org/abbrev
+204 verbose url raw bluebird
+205 verbose url resolving [ 'https://registry.npmjs.org/', './bluebird' ]
+206 verbose url resolved https://registry.npmjs.org/bluebird
+207 info trying registry request attempt 1 at 20:12:08
+208 verbose etag "8D5HMI02PW9088K2TBCN7LWS8"
+209 http GET https://registry.npmjs.org/bluebird
+210 info addNameTag [ 'minimist', '^1.2.0' ]
+211 verbose cache add [ 'tildify@^1.1.2', null ]
+212 silly cache add name=undefined spec="tildify@^1.1.2" args=["tildify@^1.1.2",null]
+213 verbose parsed url { pathname: 'tildify@^1.1.2',
+213 verbose parsed url   path: 'tildify@^1.1.2',
+213 verbose parsed url   href: 'tildify@^1.1.2' }
+214 silly cache add name="tildify" spec="^1.1.2" args=["tildify","^1.1.2"]
+215 verbose parsed url { pathname: '^1.1.2', path: '^1.1.2', href: '^1.1.2' }
+216 verbose addNamed [ 'tildify', '^1.1.2' ]
+217 verbose addNamed [ null, null ]
+218 silly lockFile e49dbc8a-tildify-1-1-2 tildify@^1.1.2
+219 verbose lock tildify@^1.1.2 /Users/hcastermans/.npm/e49dbc8a-tildify-1-1-2.lock
+220 info addNameTag [ 'tildify', '^1.1.2' ]
+221 verbose url raw chalk
+222 verbose url resolving [ 'https://registry.npmjs.org/', './chalk' ]
+223 verbose url resolved https://registry.npmjs.org/chalk
+224 info trying registry request attempt 1 at 20:12:08
+225 verbose etag "C9YD3V5XE0DT3DYNQ0TDN3KVX"
+226 http GET https://registry.npmjs.org/chalk
+227 verbose url raw hexo-fs
+228 verbose url resolving [ 'https://registry.npmjs.org/', './hexo-fs' ]
+229 verbose url resolved https://registry.npmjs.org/hexo-fs
+230 info trying registry request attempt 1 at 20:12:08
+231 verbose etag "7MFKZP06F27LZ7ZV92P611Q98"
+232 http GET https://registry.npmjs.org/hexo-fs
+233 verbose url raw minimist
+234 verbose url resolving [ 'https://registry.npmjs.org/', './minimist' ]
+235 verbose url resolved https://registry.npmjs.org/minimist
+236 info trying registry request attempt 1 at 20:12:08
+237 verbose etag "BW7ZDB5CLQ74FBE9GX3IWQ7MV"
+238 http GET https://registry.npmjs.org/minimist
+239 verbose url raw tildify
+240 verbose url resolving [ 'https://registry.npmjs.org/', './tildify' ]
+241 verbose url resolved https://registry.npmjs.org/tildify
+242 info trying registry request attempt 1 at 20:12:08
+243 verbose etag "2CC2F7FW8M2IW3LNQX9B1US1H"
+244 http GET https://registry.npmjs.org/tildify
+245 http 304 https://registry.npmjs.org/bluebird
+246 silly registry.get cb [ 304,
+246 silly registry.get   { date: 'Sat, 14 Nov 2015 19:12:09 GMT',
+246 silly registry.get     via: '1.1 varnish',
+246 silly registry.get     'cache-control': 'max-age=60',
+246 silly registry.get     etag: '"8D5HMI02PW9088K2TBCN7LWS8"',
+246 silly registry.get     age: '15',
+246 silly registry.get     connection: 'keep-alive',
+246 silly registry.get     'x-served-by': 'cache-ams4145-AMS',
+246 silly registry.get     'x-cache': 'HIT',
+246 silly registry.get     'x-cache-hits': '1',
+246 silly registry.get     'x-timer': 'S1447528329.014843,VS0,VE1',
+246 silly registry.get     vary: 'Accept' } ]
+247 verbose etag bluebird from cache
+248 http 304 https://registry.npmjs.org/chalk
+249 silly registry.get cb [ 304,
+249 silly registry.get   { date: 'Sat, 14 Nov 2015 19:12:09 GMT',
+249 silly registry.get     via: '1.1 varnish',
+249 silly registry.get     'cache-control': 'max-age=60',
+249 silly registry.get     etag: '"C9YD3V5XE0DT3DYNQ0TDN3KVX"',
+249 silly registry.get     age: '58',
+249 silly registry.get     connection: 'keep-alive',
+249 silly registry.get     'x-served-by': 'cache-ams4133-AMS',
+249 silly registry.get     'x-cache': 'HIT',
+249 silly registry.get     'x-cache-hits': '2',
+249 silly registry.get     'x-timer': 'S1447528329.028601,VS0,VE0',
+249 silly registry.get     vary: 'Accept' } ]
+250 verbose etag chalk from cache
+251 http 304 https://registry.npmjs.org/abbrev
+252 silly registry.get cb [ 304,
+252 silly registry.get   { date: 'Sat, 14 Nov 2015 19:12:09 GMT',
+252 silly registry.get     via: '1.1 varnish',
+252 silly registry.get     'cache-control': 'max-age=60',
+252 silly registry.get     etag: '"F3Q3N6H2H59MS1PC9J6CMODYT"',
+252 silly registry.get     age: '53',
+252 silly registry.get     connection: 'keep-alive',
+252 silly registry.get     'x-served-by': 'cache-ams4147-AMS',
+252 silly registry.get     'x-cache': 'HIT',
+252 silly registry.get     'x-cache-hits': '1',
+252 silly registry.get     'x-timer': 'S1447528329.019187,VS0,VE0',
+252 silly registry.get     vary: 'Accept' } ]
+253 verbose etag abbrev from cache
+254 silly lockFile b6975983-bluebird-3-0-5 bluebird@^3.0.5
+255 silly lockFile b07b58bc-chalk-1-1-1 chalk@^1.1.1
+256 silly lockFile ec589c49-abbrev-1-0-7 abbrev@^1.0.7
+257 verbose about to build /usr/local/lib/node_modules/hexo-cli
+258 info /usr/local/lib/node_modules/hexo-cli unbuild
+259 verbose from cache /usr/local/lib/node_modules/hexo-cli/package.json
+260 info preuninstall hexo-cli@0.1.9
+261 http 304 https://registry.npmjs.org/minimist
+262 silly registry.get cb [ 304,
+262 silly registry.get   { date: 'Sat, 14 Nov 2015 19:12:09 GMT',
+262 silly registry.get     via: '1.1 varnish',
+262 silly registry.get     'cache-control': 'max-age=60',
+262 silly registry.get     etag: '"BW7ZDB5CLQ74FBE9GX3IWQ7MV"',
+262 silly registry.get     age: '35',
+262 silly registry.get     connection: 'keep-alive',
+262 silly registry.get     'x-served-by': 'cache-ams4121-AMS',
+262 silly registry.get     'x-cache': 'HIT',
+262 silly registry.get     'x-cache-hits': '1',
+262 silly registry.get     'x-timer': 'S1447528329.056563,VS0,VE0',
+262 silly registry.get     vary: 'Accept' } ]
+263 verbose etag minimist from cache
+264 info uninstall hexo-cli@0.1.9
+265 verbose true,/usr/local/lib/node_modules,/usr/local/lib/node_modules unbuild hexo-cli@0.1.9
+266 verbose /usr/local/bin,[object Object] binRoot
+267 info postuninstall hexo-cli@0.1.9
+268 silly lockFile 53129369-minimist-1-2-0 minimist@^1.2.0
+269 error Error: No compatible version found: bluebird@'^3.0.5'
+269 error Valid install targets:
+269 error ["0.7.1-1","0.7.1-2","0.7.1-3","0.7.1-4","0.7.1-5","0.7.2-0","0.7.3-0","0.7.4-0","0.7.4-1","0.7.5-0","0.7.6-0","0.7.7-0","0.7.7-1","0.7.8-0","0.7.8-1","0.7.9-0","0.7.9-1","0.7.10-0","0.7.10-1","0.7.11-0","0.7.12-0","0.7.12-1","0.7.12-2","0.8.0-0","0.8.0-1","0.8.0-2","0.8.0-3","0.8.1-0","0.8.2-0","0.8.2-1","0.8.2-2","0.8.3-0","0.8.3-1","0.8.3-2","0.8.3-3","0.8.4-0","0.8.4-1","0.8.5-0","0.8.5-1","0.9.0-0","0.9.1-0","0.9.1-1","0.9.2-0","0.9.2-1","0.9.3-0","0.9.4-0","0.9.4-1","0.9.5-0","0.9.6-0","0.9.7-0","0.9.8-0","0.9.9-0","0.9.10-0","0.9.10-1","0.9.11-0","0.9.11-1","0.10.0-0","0.10.0-1","0.10.1-0","0.10.2-0","0.10.2-1","0.10.3-0","0.10.4-0","0.10.4-1","0.10.5-0","0.10.6-0","0.10.7-0","0.10.8-0","0.10.9-0","0.10.9-1","0.10.10-0","0.10.11-0","0.10.11-1","0.10.11-2","0.10.11-4","0.10.12-0","0.10.13-0","0.10.13-1","0.10.14-0","0.11.0-0","0.11.1-0","0.11.2-0","0.11.3-0","0.11.4-0","0.11.4-1","0.11.5-0","0.11.5-1","0.11.6-0","1.0.0","1.0.1","1.0.2","1.0.3","1.0.4","1.0.5","1.0.7","1.0.8","1.1.0","1.1.1","1.2.0","1.2.1","1.2.2","1.2.3","1.2.4","2.0.2","2.0.3","2.0.4","2.0.5","2.0.6","2.0.7","2.1.1","2.1.2","2.1.3","2.2.0","2.2.1","2.2.2","2.3.0","2.3.1","2.3.2","2.3.3","2.3.4","2.3.5","0.11.6","2.3.6","2.3.9","2.3.10","2.3.11","2.4.0","2.4.1","2.4.2","2.4.3","2.5.0","2.5.1","2.5.2","2.5.3","2.6.0","2.6.1","2.6.2","2.6.3","2.6.4","2.7.0","2.7.1","2.8.0","2.8.1","2.8.2","2.9.0","2.9.1","2.9.2","2.9.3","2.9.4","2.9.5","2.9.6","2.9.7","2.9.8","2.9.9","2.9.10","2.9.11","2.9.12","2.9.13","2.9.14","2.9.15","2.9.16","2.9.17","2.9.18","2.9.19","2.9.20","2.9.21","2.9.22","2.9.23","2.9.24","2.9.25","2.9.26","2.9.27","2.9.28","2.9.29","2.9.30","2.9.31","2.9.32","2.9.33","2.9.34","2.10.0","2.10.1","2.10.2","3.0.0","3.0.1","3.0.2","3.0.3","3.0.4","3.0.5"]
+269 error     at installTargetsError (/usr/local/lib/node_modules/npm/lib/cache.js:553:10)
+269 error     at /usr/local/lib/node_modules/npm/lib/cache.js:477:15
+269 error     at saved (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:138:7)
+269 error     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:220:7
+269 error     at Object.oncomplete (fs.js:297:15)
+270 error If you need help, you may report this log at:
+270 error     <http://github.com/isaacs/npm/issues>
+270 error or email it to:
+270 error     <npm-@googlegroups.com>
+271 error System Darwin 14.5.0
+272 error command "node" "/usr/local/bin/npm" "install" "hexo-cli" "-g"
+273 error cwd /Users/hcastermans/examples/node.js
+274 error node -v v0.8.9
+275 error npm -v 1.1.61
+276 verbose exit [ 1, true ]
