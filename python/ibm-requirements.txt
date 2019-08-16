@@ -9,5 +9,5 @@ psutil==5.0.1
 pytz==2016.10
 requests==2.12.4
 six==1.10.0
-Twisted==17.1.0
+twisted ~> 19.7.0
 zope.interface==4.3.3
